@@ -30,5 +30,3 @@ app.get('/', (req, res) => {
 app.listen(process.env.PORT || 1999, () => {
     console.log(`SERVER listening on PORT: http://localhost:1999`)
 })
-
-
