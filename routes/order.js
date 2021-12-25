@@ -3,6 +3,7 @@ const router = express.Router()
 const {verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin} = require('./verifyToken.js')
 const Order = require('../models/Order.js')
 
+
 // CREATE ORDER
 router.post('/', verifyToken, async (req, res) => {
     const newOrder = new Order(req.body)
@@ -62,6 +63,10 @@ router.get('/', verifyTokenAndAdmin, async (req, res) => {
     catch(err) {
         res.status(500).json(err)
     }
+})
+
+router.get('/income', verifyTokenAndAdmin, async (req, res) => {
+    await res.send(orders.collection("restaurants"))
 })
 
 module.exports = router

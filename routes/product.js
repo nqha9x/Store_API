@@ -54,14 +54,14 @@ router.get('/:id', async (req, res)=>{
     }
 })
 
-// GET ALL PRODUCT
+// GET ALL PRODUCTS
 router.get('/', async (req, res)=>{
     const qNew = req.query.new
     const qCategory = req.query.category
     try {
         let products
         if(qNew) {
-            products = await Product.find().sort({createdAt: -1}).limit(5)
+            products = await Product.find().sort({createdAt: -1}).limit(1)
         } 
         else if (qCategory) {
             products = await Product.find({

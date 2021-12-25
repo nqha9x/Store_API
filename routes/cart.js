@@ -43,7 +43,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res)=>{
     }
 })
 
-// GET CART by id
+// GET CART by user id
 router.get('/:userId', verifyTokenAndAuthorization, async (req, res)=>{
     try {
         const cart =  await Cart.findOne({userId: req.params.userId})

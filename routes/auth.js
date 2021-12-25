@@ -25,12 +25,16 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username })
-        !user && res.status(401).json('Wrong information!')
+        if(!user){
+            res.status(401).json('incorrect username!')
+        }
 
         const hashedPassword = CryptoJS.Rabbit.decrypt(user.password, process.env.PASS_SEC)
         const password = hashedPassword.toString(CryptoJS.enc.Utf8)        
 
-        password !== req.body.password && res.status(401).json('Wrong information!')   
+        if(password !== req.body.password) {
+            res.status(401).json('incorrect password!')  
+        }
         
         const accessToken = jwt.sign({
             id: user._id,
